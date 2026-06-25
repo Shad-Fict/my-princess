@@ -1,0 +1,479 @@
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --pink-light: #FFD1DC;
+    --pink-mid: #FF69B4;
+    --pink-dark: #FF1493;
+    --lavender: #E6E6FA;
+    --gold: #FFD700;
+    --deep-purple: #0a0118;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== FONTS ===== */
+.font-playfair { font-family: 'Playfair Display', serif; }
+.font-quicksand { font-family: 'Quicksand', sans-serif; }
+
+/* ===== BASE ===== */
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,105,180,0.3) transparent;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,105,180,0.3); border-radius: 3px; }
+
+::selection {
+    background: rgba(255,105,180,0.3);
+    color: #fff;
+}
+
+/* ===== AURORA BACKGROUND ===== */
+.aurora-bg {
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(255,105,180,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(147,112,219,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 80%, rgba(255,182,193,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 80%, rgba(255,215,0,0.04) 0%, transparent 40%);
+    animation: auroraShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+    0% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.1) rotate(1deg); }
+    100% { opacity: 0.7; transform: scale(1.05) rotate(-1deg); }
+}
+
+/* ===== GLASSMORPHISM ===== */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== GLOWING BUTTONS ===== */
+.glow-btn {
+    background: linear-gradient(135deg, #ff6b9d, #ff2d7b, #ff6b9d);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    color: white;
+    box-shadow: 
+        0 0 20px rgba(255,105,180,0.4),
+        0 0 60px rgba(255,105,180,0.2);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.glow-btn-sm {
+    background: linear-gradient(135deg, #ff6b9d, #c084fc, #ff6b9d);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    color: white;
+    box-shadow: 0 0 20px rgba(255,105,180,0.3);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes pulseSlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes heartFloat {
+    0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-300px) scale(0) rotate(360deg); opacity: 0; }
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounceSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes albumSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes visualizerBar {
+    0%, 100% { height: 4px; }
+    50% { height: var(--bar-height, 16px); }
+}
+
+@keyframes floatCompliment {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    10% { opacity: 1; transform: translateY(-20px) scale(1); }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-120px) scale(0.8); opacity: 0; }
+}
+
+/* ===== CUSTOM CLASSES ===== */
+.animate-blink { animation: blink 1s ease-in-out infinite; }
+.animate-pulse-slow { animation: pulseSlow 3s ease-in-out infinite; }
+.animate-bounce-slow { animation: bounceSlow 2s ease-in-out infinite; }
+.album-spin { animation: albumSpin 4s linear infinite; }
+.album-spin.paused { animation-play-state: paused; }
+
+.hero-title {
+    background: linear-gradient(135deg, #FFD1DC, #fff, #FFD1DC, #FFD700);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 6s ease infinite;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(255,182,193,0.3));
+}
+
+/* ===== GALLERY POLAROID ===== */
+.polaroid-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 8px;
+    padding: 8px 8px 32px 8px;
+    box-shadow: 
+        0 4px 20px rgba(0,0,0,0.3),
+        0 0 40px rgba(255,105,180,0.1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: rotate(var(--rotation, 0deg));
+    cursor: pointer;
+    break-inside: avoid;
+    margin-bottom: 16px;
+}
+
+.polaroid-card:hover {
+    transform: rotate(0deg) scale(1.05) translateY(-8px);
+    box-shadow: 
+        0 12px 40px rgba(0,0,0,0.4),
+        0 0 60px rgba(255,105,180,0.2);
+    z-index: 10;
+}
+
+.polaroid-card img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+}
+
+.polaroid-card .polaroid-text {
+    font-family: 'Quicksand', sans-serif;
+    color: #666;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* ===== TIMELINE ===== */
+.timeline-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+}
+
+.timeline-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,105,180,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px rgba(255,105,180,0.15);
+}
+
+.timeline-card .card-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.timeline-card.expanded .card-content {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b9d, #ff2d7b);
+    box-shadow: 0 0 20px rgba(255,105,180,0.5);
+    animation: pulseSlow 2s ease-in-out infinite;
+}
+
+/* ===== REASON CARDS ===== */
+.reason-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.reason-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reason-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,105,180,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(255,105,180,0.15);
+}
+
+/* ===== OBSESSED CARDS ===== */
+.obsessed-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 28px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.obsessed-card.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.obsessed-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,105,180,0.3);
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(255,105,180,0.2);
+}
+
+/* ===== FLOATING COMPLIMENTS ===== */
+.floating-compliment {
+    position: absolute;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    color: var(--pink-light);
+    text-shadow: 0 0 20px rgba(255,105,180,0.5);
+    animation: floatCompliment 4s ease-out forwards;
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* ===== VISUALIZER BARS ===== */
+.viz-bar {
+    width: 3px;
+    background: linear-gradient(to top, #ff6b9d, #ff2d7b);
+    border-radius: 2px;
+    animation: visualizerBar 0.8s ease-in-out infinite;
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.reveal-fade {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* ===== SECRET ENVELOPE ===== */
+.envelope-open {
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* ===== NAV DOTS ===== */
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,182,193,0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-dot:hover, .nav-dot.active {
+    background: rgba(255,182,193,0.9);
+    box-shadow: 0 0 10px rgba(255,105,180,0.5);
+    transform: scale(1.3);
+}
+
+/* ===== LOADING SCREEN ===== */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #0a0118;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+#loadingScreen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===== HEART SPARKLE ===== */
+.heart-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 65;
+    font-size: 16px;
+    animation: heartFloat 2s ease-out forwards;
+}
+
+/* ===== MUSIC BTN TOP CORNER ===== */
+.music-btn {
+    transition: all 0.3s ease;
+}
+
+.music-btn.playing {
+    background: linear-gradient(135deg, #ff6b9d, #ff2d7b) !important;
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+}
+
+.music-btn.playing::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b9d, #c084fc, #ff6b9d);
+    z-index: -1;
+    animation: gradientShift 2s ease infinite;
+    opacity: 0.5;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .polaroid-card {
+        padding: 6px 6px 24px 6px;
+        margin-bottom: 12px;
+    }
+    
+    .glass-card {
+        padding: 20px !important;
+    }
+    
+    .reason-card {
+        padding: 14px;
+    }
+    
+    .obsessed-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #musicPlayer {
+        top: 8px;
+        right: 8px;
+    }
+}
+
+/* ===== CUSTOM SCROLLBAR FOR GALLERY ===== */
+#galleryGrid {
+    column-fill: balance;
+}
+
+/* ===== TEXT GRADIENTS ===== */
+.text-gradient-pink {
+    background: linear-gradient(135deg, #FFD1DC, #FF69B4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-gold {
+    background: linear-gradient(135deg, #FFD700, #FFC0CB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== SMOOTH SECTION TRANSITIONS ===== */
+section {
+    position: relative;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,105,180,0.2), transparent);
+}
+
+/* Hearts on lightbox */
+.lightbox-heart {
+    position: absolute;
+    animation: heartFloat 2s ease-out forwards;
+    pointer-events: none;
+    font-size: 24px;
+}
