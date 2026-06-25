@@ -987,12 +987,10 @@ function initBeginButton() {
         if (storyStarted) return;
         storyStarted = true;
         
-        // Start music
-        initMusicPlayer();
-        setTimeout(() => {
-            const playPauseBtn = document.getElementById('playPause');
-            playPauseBtn.click();
-        }, 500);
+        // Start background music
+const bgMusic = document.getElementById('bgMusic');
+bgMusic.volume = 0.5;   // Change this between 0.0 and 1.0 if you want
+bgMusic.play();
         
         // Start compliments
         startCompliments();
