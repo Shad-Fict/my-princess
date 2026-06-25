@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For The Most Precious Soul ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#0a0118] text-white overflow-x-hidden">
+    <!-- Background Canvas for Stars -->
+    <canvas id="bgCanvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- Aurora Background -->
+    <div class="aurora-bg fixed inset-0 z-0 pointer-events-none"></div>
+
+    <!-- Floating Compliments Container -->
+    <div id="complimentsContainer" class="fixed inset-0 z-50 pointer-events-none overflow-hidden"></div>
+
+    <!-- Heart Explosion Canvas -->
+    <canvas id="heartCanvas" class="fixed inset-0 z-[60] pointer-events-none hidden"></canvas>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas" class="fixed inset-0 z-[59] pointer-events-none hidden"></canvas>
+
+    <!-- Navigation Dots -->
+    <nav id="navDots" class="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-3 opacity-0 transition-opacity duration-1000">
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a0118]/50 via-transparent to-[#0a0118] pointer-events-none"></div>
+        <div class="text-center px-4 relative z-10">
+            <p class="font-quicksand text-xl md:text-2xl text-pink-300 tracking-widest opacity-0 mb-4" id="heroName">Saniaaaa ✨🫶🏻❤️💞</p>
+            <div class="mb-6 animate-pulse-slow">
+                <span class="text-6xl md:text-8xl">✨</span>
+            </div>
+            <h1 class="hero-title font-playfair text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 opacity-0" id="heroTitle">
+                To The Most Precious Soul<br>In My Universe ✨
+            </h1>
+            <p class="hero-subtitle text-lg sm:text-xl md:text-2xl font-quicksand text-pink-200/80 mb-10 max-w-2xl mx-auto opacity-0" id="heroSubtitle">
+                Some people become memories.<br>You became my favorite chapter.
+            </p>
+            <button id="beginBtn" class="glow-btn opacity-0 px-10 py-4 rounded-full font-quicksand text-lg md:text-xl font-semibold transition-all duration-500 hover:scale-110 hover:shadow-[0_0_40px_rgba(255,182,193,0.6)]">
+                Begin Our Story ❤️
+            </button>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-slow">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-pink-300/60"></i>
+        </div>
+    </section>
+
+    <!-- ===== LOVE LETTER SECTION ===== -->
+    <section id="loveLetter" class="relative z-10 min-h-screen flex items-center justify-center py-20 px-4">
+        <div class="max-w-3xl mx-auto w-full">
+            <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
+                <div class="absolute top-4 right-4 text-4xl animate-pulse-slow">💌</div>
+                <h2 class="font-playfair text-3xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-pink-300 via-rose-200 to-amber-200 bg-clip-text text-transparent">
+                    A Letter For Saniaaaa 💌
+                </h2>
+                <div class="w-20 h-[2px] bg-gradient-to-r from-pink-400 to-amber-300 mx-auto mb-8"></div>
+                <div id="typingContainer" class="font-quicksand text-base md:text-lg leading-relaxed text-pink-100/90 min-h-[300px] md:min-h-[400px] relative">
+                    <span id="typingText" class="inline"></span>
+                    <span id="cursor" class="inline-block w-[2px] h-5 bg-pink-300 animate-blink ml-[2px]"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PHOTO GALLERY SECTION ===== -->
+    <section id="gallery" class="relative z-10 py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-playfair text-4xl md:text-6xl font-bold text-center mb-4 bg-gradient-to-r from-pink-300 via-purple-200 to-amber-200 bg-clip-text text-transparent">
+                Our Beautiful Moments 📸
+            </h2>
+            <p class="text-center font-quicksand text-pink-200/60 mb-12 text-lg">Every picture tells a story... every moment with you is magic</p>
+            <div id="galleryGrid" class="columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[70] bg-black/90 backdrop-blur-lg hidden items-center justify-center p-4">
+        <button id="closeLightbox" class="absolute top-4 right-4 text-white/80 hover:text-white transition-colors z-[71]">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <button id="prevPhoto" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors z-[71]">
+            <i data-lucide="chevron-left" class="w-10 h-10"></i>
+        </button>
+        <button id="nextPhoto" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors z-[71]">
+            <i data-lucide="chevron-right" class="w-10 h-10"></i>
+        </button>
+        <div id="lightboxHearts" class="absolute inset-0 pointer-events-none z-[71]"></div>
+        <img id="lightboxImg" class="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain" src="" alt="Gallery Image">
+    </div>
+
+    <!-- ===== MEMORIES TIMELINE ===== -->
+    <section id="timeline" class="relative z-10 py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-playfair text-4xl md:text-6xl font-bold text-center mb-4 bg-gradient-to-r from-pink-300 via-rose-200 to-purple-200 bg-clip-text text-transparent">
+                Our Story Timeline 🌸
+            </h2>
+            <p class="text-center font-quicksand text-pink-200/60 mb-16 text-lg">Every moment with you is etched in my heart</p>
+            <div id="timelineContainer" class="relative">
+                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-pink-400 via-purple-400 to-pink-300"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 100 REASONS SECTION ===== -->
+    <section id="reasons" class="relative z-10 py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-playfair text-4xl md:text-6xl font-bold text-center mb-4 bg-gradient-to-r from-pink-300 via-amber-200 to-rose-200 bg-clip-text text-transparent">
+                100 Reasons Why You're Special ✨
+            </h2>
+            <p class="text-center font-quicksand text-pink-200/60 mb-12 text-lg">Every single one is true... and there are even more</p>
+            <div id="reasonsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY I'M OBSESSED ===== -->
+    <section id="obsessed" class="relative z-10 py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-playfair text-4xl md:text-6xl font-bold text-center mb-4 bg-gradient-to-r from-rose-300 via-pink-200 to-red-300 bg-clip-text text-transparent">
+                Why I'm Obsessed With You 💗
+            </h2>
+            <p class="text-center font-quicksand text-pink-200/60 mb-12 text-lg">Every little thing about you drives me crazy... in the best way</p>
+            <div id="obsessedGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INTERACTIVE HEART ===== -->
+    <section id="heart" class="relative z-10 min-h-screen flex items-center justify-center py-20 px-4">
+        <div class="text-center">
+            <h2 class="font-playfair text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-300 via-rose-200 to-red-300 bg-clip-text text-transparent">
+                Tap This Heart 💗
+            </h2>
+            <p class="font-quicksand text-pink-200/60 mb-10 text-lg">And see how much you mean to me</p>
+            <div id="interactiveHeart" class="relative inline-block cursor-pointer mx-auto group">
+                <svg viewBox="0 0 200 200" class="w-48 h-48 md:w-64 md:h-64 heart-svg drop-shadow-[0_0_30px_rgba(255,105,180,0.5)] group-hover:drop-shadow-[0_0_50px_rgba(255,105,180,0.8)] transition-all duration-500 group-hover:scale-110">
+                    <defs>
+                        <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff6b9d;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#ff2d7b;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff6b9d;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="heartShine" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fff;stop-opacity:0.4" />
+                            <stop offset="100%" style="stop-color:#fff;stop-opacity:0" />
+                        </linearGradient>
+                        <filter id="heartGlow">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <path d="M100 180 C60 140, 10 100, 10 60 C10 30, 30 10, 60 10 C80 10, 90 20, 100 40 C110 20, 120 10, 140 10 C170 10, 190 30, 190 60 C190 100, 140 140, 100 180Z" fill="url(#heartGrad)" filter="url(#heartGlow)">
+                        <animate attributeName="d" dur="1s" repeatCount="indefinite" values="M100 180 C60 140, 10 100, 10 60 C10 30, 30 10, 60 10 C80 10, 90 20, 100 40 C110 20, 120 10, 140 10 C170 10, 190 30, 190 60 C190 100, 140 140, 100 180Z;M100 175 C60 135, 15 100, 15 60 C15 32, 32 15, 60 15 C80 15, 90 25, 100 42 C110 25, 120 15, 140 15 C168 15, 185 32, 185 60 C185 100, 140 135, 100 175Z;M100 180 C60 140, 10 100, 10 60 C10 30, 30 10, 60 10 C80 10, 90 20, 100 40 C110 20, 120 10, 140 10 C170 10, 190 30, 190 60 C190 100, 140 140, 100 180Z" />
+                    </path>
+                    <path d="M60 30 C70 20, 85 25, 80 40" fill="url(#heartShine)" opacity="0.5" />
+                </svg>
+                <div class="absolute inset-0 rounded-full bg-pink-400/10 animate-pulse-slow"></div>
+            </div>
+            <p id="heartMessage" class="font-quicksand text-xl md:text-2xl mt-10 text-pink-200 opacity-0 transition-all duration-1000 max-w-lg mx-auto">
+                You'll always have a special place in my heart. 💗
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== SECRET MESSAGE ===== -->
+    <section id="secret" class="relative z-10 min-h-screen flex items-center justify-center py-20 px-4">
+        <div class="text-center">
+            <div class="mb-8">
+                <span class="text-5xl md:text-6xl animate-pulse-slow inline-block">🤫</span>
+            </div>
+            <h2 class="font-playfair text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-amber-200 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+                I Have a Secret For You 🤫
+            </h2>
+            <p class="font-quicksand text-pink-200/60 mb-8 text-lg">Something I've been wanting to tell you...</p>
+            <button id="secretBtn" class="glow-btn-sm px-8 py-3 rounded-full font-quicksand text-lg font-semibold transition-all duration-500 hover:scale-110">
+                Open My Heart 💌
+            </button>
+            <div id="secretEnvelope" class="hidden max-w-xl mx-auto mt-8">
+                <div class="glass-card p-8 md:p-12 rounded-3xl reveal-up">
+                    <div class="text-5xl mb-6">💌</div>
+                    <p class="font-playfair text-xl md:text-2xl leading-relaxed text-pink-100/90 italic">
+                        "If you ever wonder how much you mean to me...<br><br>
+                        The answer is always <span class="bg-gradient-to-r from-pink-300 to-amber-200 bg-clip-text text-transparent font-bold not-italic text-2xl md:text-3xl">more than words can ever explain.</span>"
+                    </p>
+                    <div class="mt-8 w-20 h-[2px] bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NIGHT SKY SECTION ===== -->
+    <section id="nightSky" class="relative z-10 min-h-screen py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center relative">
+            <h2 class="font-playfair text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                Under The Stars For You 🌙
+            </h2>
+            <p class="font-quicksand text-pink-200/60 mb-8 text-lg">Click on the stars... each one has something special for you</p>
+            <div class="relative w-full" style="min-height: 500px;">
+                <canvas id="skyCanvas" class="w-full rounded-3xl cursor-crosshair" style="height: 500px;"></canvas>
+                <div id="skyCompliment" class="absolute text-pink-200 font-quicksand text-lg pointer-events-none opacity-0 transition-all duration-700 whitespace-nowrap"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ENDING SECTION ===== -->
+    <section id="ending" class="relative z-10 min-h-screen flex items-center justify-center py-20 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="glass-card p-8 md:p-16 rounded-3xl reveal-up">
+                <div class="text-6xl mb-6 animate-pulse-slow">🤍</div>
+                <p class="font-playfair text-xl md:text-3xl leading-relaxed text-pink-100/90 mb-6">
+                    No matter where life takes us...
+                </p>
+                <p class="font-playfair text-xl md:text-3xl leading-relaxed text-pink-100/90 mb-6">
+                    I hope you always remember one thing...
+                </p>
+                <div class="my-10 w-32 h-[2px] bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto"></div>
+                <p class="font-playfair text-2xl md:text-4xl leading-relaxed bg-gradient-to-r from-pink-300 via-rose-200 to-amber-200 bg-clip-text text-transparent font-bold mb-4">
+                    You are deeply appreciated.
+                </p>
+                <p class="font-playfair text-2xl md:text-4xl leading-relaxed bg-gradient-to-r from-pink-300 via-purple-200 to-rose-200 bg-clip-text text-transparent font-bold mb-4">
+                    You are genuinely admired.
+                </p>
+                <p class="font-playfair text-2xl md:text-4xl leading-relaxed bg-gradient-to-r from-rose-300 via-pink-200 to-amber-200 bg-clip-text text-transparent font-bold mb-4">
+                    You are incredibly beautiful.
+                </p>
+                <p class="font-playfair text-2xl md:text-4xl leading-relaxed bg-gradient-to-r from-amber-200 via-pink-300 to-rose-300 bg-clip-text text-transparent font-bold">
+                    And you'll always be someone very, very special to me.
+                </p>
+                <div class="my-10 w-32 h-[2px] bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto"></div>
+                <p class="font-quicksand text-xl md:text-2xl text-pink-200/80 font-semibold">
+                    Thank you for existing, Saniaaaa. ❤️
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="relative z-10 py-12 text-center">
+        <div class="w-20 h-[1px] bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-8"></div>
+        <p class="font-quicksand text-sm md:text-base text-pink-300/50 max-w-md mx-auto">
+            Made with endless appreciation, countless smiles, and a heart full of gratitude. 💗
+        </p>
+        <p class="font-quicksand text-xs text-pink-300/30 mt-4">
+            You are loved beyond measure, Saniaaaa ✨
+        </p>
+    </footer>
+
+    <!-- ===== MUSIC PLAYER (TOP CORNER) ===== -->
+    <div id="musicPlayer" class="fixed top-4 right-4 z-50 hidden">
+        <button id="playPause" class="music-btn relative w-12 h-12 rounded-full bg-gradient-to-r from-pink-500/90 to-purple-500/90 backdrop-blur-xl border border-pink-300/30 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50" title="Play/Pause Music">
+            <i data-lucide="play" class="w-5 h-5 fill-white text-white" id="playIcon"></i>
+        </button>
+        <!-- Hidden song info for JS reference -->
+        <span id="songTitle" class="hidden">Timeless</span>
+        <span id="songArtist" class="hidden">Dreamwav</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
