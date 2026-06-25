@@ -168,15 +168,18 @@ const captions = [
     "Days to remember 💎"
 ];
 
-for (let i = 0; i < 10; i++) {
-    const cat = categories[i];
-    const dims = i % 3 === 0 ? '640x360' : (i % 3 === 1 ? '320x240' : '200x200');
-    galleryImages.push({
-        url: `http://static.photos/${cat}/${dims}/${i + 1}`,
-        caption: captions[i]
-    });
-}
-
+galleryImages.push(
+    { url: "images/images:sania1.jpg", caption: captions[0] },
+    { url: "images/images:sania2.jpg", caption: captions[1] },
+    { url: "images/images:sania3.jpg", caption: captions[2] },
+    { url: "images/images:sania4.jpg", caption: captions[3] },
+    { url: "images/images:sania5.jpeg", caption: captions[4] },
+    { url: "images/images:sania6.jpg", caption: captions[5] },
+    { url: "images/images:sania7.jpg", caption: captions[6] },
+    { url: "images/images:sania8.jpg", caption: captions[7] },
+    { url: "images/images:sania9.jpg", caption: captions[8] },
+    { url: "images/images:sania10.jpg", caption: captions[9] }
+);
 const playlist = [
     { title: "Timeless", artist: "Dreamwav", freq: [261.63, 329.63, 392.00] },
     { title: "Infinite", artist: "Starlit", freq: [293.66, 349.23, 440.00] },
